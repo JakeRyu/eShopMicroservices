@@ -26,6 +26,8 @@ if (builder.Environment.IsDevelopment())
 
 builder.Services.AddExceptionHandler<CustomExceptionHandler>();
 
+builder.Services.AddHealthChecks();
+
 // -------------------------------------
 var app = builder.Build();
 // -------------------------------------
@@ -34,5 +36,7 @@ var app = builder.Build();
 app.MapCarter();
 
 app.UseExceptionHandler(options => { });
+
+app.UseHealthChecks("/health");
 
 app.Run();
