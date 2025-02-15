@@ -8,6 +8,7 @@ builder.Services.AddMediatR(exceptionHandlerApp =>
 {
     exceptionHandlerApp.RegisterServicesFromAssembly(assembly);
     exceptionHandlerApp.AddOpenBehavior(typeof(ValidationBehaviour<,>));
+    exceptionHandlerApp.AddOpenBehavior(typeof(LoggingBehaviours<,>));
 });
 
 builder.Services.AddValidatorsFromAssembly(assembly);
