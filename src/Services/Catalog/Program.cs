@@ -1,11 +1,19 @@
+using BuildingBlocks.Behaviours;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to DI container
-builder.Services.AddCarter();
+var assembly = typeof(Program).Assembly;
 builder.Services.AddMediatR(config =>
 {
-    config.RegisterServicesFromAssembly(typeof(Program).Assembly);
+    config.RegisterServicesFromAssembly(assembly);
+    config.AddOpenBehavior(typeof(ValidationBehaviour<,>));
 });
+
+builder.Services.AddValidatorsFromAssembly(assembly);
+
+builder.Services.AddCarter();
+
 builder.Services.AddMarten(option =>
 {
     option.Connection(builder.Configuration.GetConnectionString("Database")!);
