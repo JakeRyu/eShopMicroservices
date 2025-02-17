@@ -11,6 +11,14 @@ builder.Services.AddMediatR(exceptionHandlerApp =>
 
 builder.Services.AddCarter();
 
+builder.Services.AddMarten(option =>
+    {
+        option.Connection(builder.Configuration.GetConnectionString("Database")!);
+        // Marten by default create schema automatically
+        option.Schema.For<ShoppingCart>().Identity(x => x.UserName);
+    })
+    .UseLightweightSessions();
+
 // --------------------------------------
 var app = builder.Build();
 // --------------------------------------
