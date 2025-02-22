@@ -1,16 +1,18 @@
-﻿namespace Basket.API.Basket.GetBasket;
+﻿using Basket.API.Data;
+
+namespace Basket.API.Basket.GetBasket;
 
 public record GetBasketQuery(string UserName) : IQuery<GetBasketResult>;
 
 public record GetBasketResult(ShoppingCart Cart);
 
-public class GetBasketHandler : IQueryHandler<GetBasketQuery, GetBasketResult>
+public class GetBasketHandler(IBasketRepository repository) : IQueryHandler<GetBasketQuery, GetBasketResult>
 {
 
     public async Task<GetBasketResult> Handle(GetBasketQuery query, CancellationToken cancellationToken)
     {
-        // dodo: get basket form database
+        var basket = await repository.GetBasket(query.UserName, cancellationToken);
 
-        return new GetBasketResult(new ShoppingCart("new"));
+        return new GetBasketResult(basket);
     }
 }

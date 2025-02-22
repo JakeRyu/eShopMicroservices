@@ -19,6 +19,8 @@ builder.Services.AddMarten(option =>
     })
     .UseLightweightSessions();
 
+builder.Services.AddScoped<IBasketRepository, BasketRepository>();
+
 // --------------------------------------
 var app = builder.Build();
 // --------------------------------------

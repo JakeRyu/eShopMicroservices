@@ -8,7 +8,7 @@ public class StoreBasketEndpoint : ICarterModule
 {
     public void AddRoutes(IEndpointRouteBuilder app)
     {
-        app.MapPost("/baskets", async (StoreBasketResult request, ISender sender, CancellationToken cancellationToken) =>
+        app.MapPost("/baskets", async (StoreBasketRequest request, ISender sender, CancellationToken cancellationToken) =>
         {
             var command = request.Adapt<StoreBasketCommand>();
             
