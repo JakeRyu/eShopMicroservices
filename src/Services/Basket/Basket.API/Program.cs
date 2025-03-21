@@ -26,7 +26,6 @@ builder.Services.AddMarten(option =>
 
 // Data services
 builder.Services.AddScoped<IBasketRepository, BasketRepository>();
-builder.Services.AddExceptionHandler<CustomExceptionHandler>();
 builder.Services.AddScoped<IBasketRepository, BasketRepository>();
 builder.Services.Decorate<IBasketRepository, CachedBasketRepository>();
 builder.Services.AddStackExchangeRedisCache(options =>

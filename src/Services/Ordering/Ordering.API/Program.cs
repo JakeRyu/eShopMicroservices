@@ -1,3 +1,4 @@
+using BuildingBlocks.Exceptions.Handler;
 using Ordering.API;
 using Ordering.Application;
 using Ordering.Infrastructure;
@@ -9,7 +10,9 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services
     .AddApplicationServices()
     .AddInfrastructureServices(builder.Configuration)
-    .AddApiServices();
+    .AddApiServices(builder.Configuration);
+
+builder.Services.AddExceptionHandler<CustomExceptionHandler>();
 
 var app = builder.Build();
 
