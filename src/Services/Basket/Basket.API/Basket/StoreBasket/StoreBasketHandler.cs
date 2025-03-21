@@ -34,6 +34,8 @@ public class StoreBasketHandler(IBasketRepository repository, DiscountProtoServi
         foreach (var item in cart.Items)
         {
             var coupon = await discountProto.GetDiscountAsync(new GetDiscountRequest { ProductName = item.ProductName },
+                null,
+                null,
                 cancellationToken);
             item.Price -= coupon.Amount;
         }
