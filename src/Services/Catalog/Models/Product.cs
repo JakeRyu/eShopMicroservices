@@ -1,5 +1,3 @@
-using System.Reflection;
-
 namespace Catalog.API.Models;
 
 public class Product
